@@ -2,21 +2,11 @@ version: 2.1
 
 shared_steps: &shared_steps
   - checkout
-  - run: mkdir -p ~/bin
   - restore_cache:
       keys:
       - cider-nrepl-001-{{ .Environment.EXTRA_ALIASES }}-{{ checksum "deps.edn" }}
       # fallback to using the latest cache if no exact match is found
       - cider-nrepl-001-
-  - run:
-      command: |
-        cd ~/bin
-        if [[ ! -f "lein" ]]; then
-          curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
-          curl -O https://download.clojure.org/install/linux-install-1.9.0.394.sh
-          chmod +x lein
-        fi
-  - run: sudo ln ~/bin/lein /usr/bin/lein
   - run: make $TARGET
   - save_cache:
       paths:
@@ -26,19 +16,31 @@ shared_steps: &shared_steps
 
 # https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/openjdk/images
 jobs:
+  "java-11-clojure-1-9-clj":
+    docker:
+      - image: lambdaisland/clojure:openjdk11
+    environment:
+      VERSION: "1.9"
+      TARGET: test-clj
+    steps: *shared_steps
+  "java-11-clojure-1-9-cljs":
+    docker:
+      - image: lambdaisland/clojure:openjdk11
+    environment:
+      VERSION: "1.9"
+      TARGET: test-cljs
+    steps: *shared_steps
   "java-8-clojure-1-9-clj":
     docker:
-      - image: circleci/openjdk:8u181-jdk-stretch
+      - image: lambdaisland/clojure:openjdk8
     environment:
-      LEIN_ROOT: "true"
       VERSION: "1.9"
       TARGET: test-clj
     steps: *shared_steps
   "java-8-clojure-1-9-cljs":
     docker:
-      - image: circleci/openjdk:8u181-jdk-stretch
+      - image: lambdaisland/clojure:openjdk8
     environment:
-      LEIN_ROOT: "true"
       VERSION: "1.9"
       TARGET: test-cljs
     steps: *shared_steps
@@ -49,3 +51,5 @@ workflows:
     jobs:
       - "java-8-clojure-1-9-clj"
       - "java-8-clojure-1-9-cljs"
+      - "java-11-clojure-1-9-clj"
+      - "java-11-clojure-1-9-cljs"
