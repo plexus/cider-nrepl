@@ -4,18 +4,46 @@ shared_steps: &shared_steps
   - checkout
   - restore_cache:
       keys:
-      - cider-nrepl-001-{{ .Environment.EXTRA_ALIASES }}-{{ checksum "deps.edn" }}
+      - cider-nrepl-002-{{ .Environment.VERSION }}-{{ .Environment.TARGET }}-{{ checksum "project.clj" }}
       # fallback to using the latest cache if no exact match is found
-      - cider-nrepl-001-
+      - cider-nrepl-002-
   - run: make $TARGET
   - save_cache:
       paths:
         - ~/.m2
         - ~/bin
-      key: cider-nrepl-001-{{ .Environment.EXTRA_ALIASES }}-{{ checksum "deps.edn" }}
+      key: cider-nrepl-002-{{ .Environment.VERSION }}-{{ .Environment.TARGET }}-{{ checksum "project.clj" }}
 
 # https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/openjdk/images
 jobs:
+  "java-11-clojure-1-10-clj":
+    docker:
+      - image: lambdaisland/clojure:openjdk11
+    environment:
+      VERSION: "1.10"
+      TARGET: test-clj
+    steps: *shared_steps
+  "java-11-clojure-1-10-cljs":
+    docker:
+      - image: lambdaisland/clojure:openjdk11
+    environment:
+      VERSION: "1.10"
+      TARGET: test-cljs
+    steps: *shared_steps
+  "java-8-clojure-1-10-clj":
+    docker:
+      - image: lambdaisland/clojure:openjdk8
+    environment:
+      VERSION: "1.10"
+      TARGET: test-clj
+    steps: *shared_steps
+  "java-8-clojure-1-10-cljs":
+    docker:
+      - image: lambdaisland/clojure:openjdk8
+    environment:
+      VERSION: "1.10"
+      TARGET: test-cljs
+    steps: *shared_steps
   "java-11-clojure-1-9-clj":
     docker:
       - image: lambdaisland/clojure:openjdk11
@@ -49,6 +77,10 @@ workflows:
   version: 2
   build:
     jobs:
+      - "java-8-clojure-1-10-clj"
+      - "java-8-clojure-1-10-cljs"
+      - "java-11-clojure-1-10-clj"
+      - "java-11-clojure-1-10-cljs"
       - "java-8-clojure-1-9-clj"
       - "java-8-clojure-1-9-cljs"
       - "java-11-clojure-1-9-clj"

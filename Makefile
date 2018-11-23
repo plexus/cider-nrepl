@@ -17,13 +17,7 @@ test-clj: .source-deps smoketest
 	lein with-profile +$(VERSION),+plugin.mranderson/config,+test-clj test
 
 test-cljs: .source-deps
-	if [ "$(JAVA_VERSION)" = "9" ]; then \
-            lein with-profile +$(VERSION),+plugin.mranderson/config,+test-cljs \
-                 update-in :jvm-opts concat '["--add-modules" "java.xml.bind"]' \
-                 -- test; \
-        else \
-            lein with-profile +$(VERSION),+plugin.mranderson/config,+test-cljs test; \
-	fi
+  lein with-profile +$(VERSION),+plugin.mranderson/config,+test-cljs test
 
 eastwood:
 	lein with-profile +$(VERSION),+test-clj,+test-cljs,+eastwood eastwood \
