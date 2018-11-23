@@ -17,7 +17,7 @@ test-clj: .source-deps smoketest
 	lein with-profile +$(VERSION),+plugin.mranderson/config,+test-clj test
 
 test-cljs: .source-deps
-  lein with-profile +$(VERSION),+plugin.mranderson/config,+test-cljs test
+	lein with-profile +$(VERSION),+plugin.mranderson/config,+test-cljs test
 
 eastwood:
 	lein with-profile +$(VERSION),+test-clj,+test-cljs,+eastwood eastwood \
