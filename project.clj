@@ -100,7 +100,7 @@
                         :test-paths ["test/clj"]}
              :test-cljs {:test-paths ["test/cljs"]
                          :dependencies [[cider/piggieback "0.3.9"]
-                                        [java.xml.bind/jaxb-api "2.3.1"]]}
+                                        [javax.xml.bind/jaxb-api "2.3.1"]]}
 
              :sysutils {:plugins [[lein-sysutils "0.2.0"]]}
 
