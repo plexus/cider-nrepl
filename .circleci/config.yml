@@ -68,38 +68,38 @@ workflows:
         clojure_version: "1.8"
         target: test-cljs
 
-    # - openjdk8:
-    #     name: "java8 clj1.10 test-clj"
-    #     clojure_version: "1.10"
-    #     target: test-clj
-    # - openjdk8:
-    #     name: "java8 clj1.10 test-cljs"
-    #     clojure_version: "1.10"
-    #     target: test-cljs
+    - openjdk8:
+        name: "java8 clj1.10 test-clj"
+        clojure_version: "1.10"
+        target: test-clj
+    - openjdk8:
+        name: "java8 clj1.10 test-cljs"
+        clojure_version: "1.10"
+        target: test-cljs
 
-    # - openjdk9:
-    #     name: "java9 clj1.9 test-clj"
-    #     clojure_version: "1.9"
-    #     target: test-clj
-    # - openjdk9:
-    #     name: "java9 clj1.9 test-cljs"
-    #     clojure_version: "1.9"
-    #     target: test-cljs
+    - openjdk9:
+        name: "java9 clj1.9 test-clj"
+        clojure_version: "1.9"
+        target: test-clj
+    - openjdk9:
+        name: "java9 clj1.9 test-cljs"
+        clojure_version: "1.9"
+        target: test-cljs
 
-    # - openjdk11:
-    #     name: "java11 clj1.8 test-clj"
-    #     clojure_version: "1.8"
-    #     target: test-clj
-    # - openjdk11:
-    #     name: "java11 clj1.8 test-cljs"
-    #     clojure_version: "1.8"
-    #     target: test-cljs
+    - openjdk11:
+        name: "java11 clj1.8 test-clj"
+        clojure_version: "1.8"
+        target: test-clj
+    - openjdk11:
+        name: "java11 clj1.8 test-cljs"
+        clojure_version: "1.8"
+        target: test-cljs
 
-    # - openjdk11:
-    #     name: "java11 clj1.10 test-clj"
-    #     clojure_version: "1.10"
-    #     target: test-clj
-    # - openjdk11:
-    #     name: "java11 clj1.10 test-cljs"
-    #     clojure_version: "1.10"
-    #     target: test-cljs
+    - openjdk11:
+        name: "java11 clj1.10 test-clj"
+        clojure_version: "1.10"
+        target: test-clj
+    - openjdk11:
+        name: "java11 clj1.10 test-cljs"
+        clojure_version: "1.10"
+        target: test-cljs
