@@ -18,6 +18,30 @@ commands:
         - run: make << parameters.target >>
 
 jobs:
+  openjdk11:
+    executor: clojure/openjdk11
+    parameters:
+      target:
+        type: string
+      clojure_version:
+        type: string
+    environment: {CLOJURE_VERSION: << parameters.clojure_version >>}
+    steps:
+    - checkout_and_run:
+        target: << parameters.target >>
+        clojure_version: << parameters.clojure_version >>
+  openjdk9:
+    executor: clojure/openjdk9
+    parameters:
+      target:
+        type: string
+      clojure_version:
+        type: string
+    environment: {CLOJURE_VERSION: << parameters.clojure_version >>}
+    steps:
+    - checkout_and_run:
+        target: << parameters.target >>
+        clojure_version: << parameters.clojure_version >>
   openjdk8:
     executor: clojure/openjdk8
     parameters:
@@ -36,10 +60,46 @@ workflows:
   cider_tests:
     jobs:
     - openjdk8:
-        name: "openjdk8 clojure1.8 test-clj"
+        name: "java8 clj1.8 test-clj"
         clojure_version: "1.8"
         target: test-clj
     - openjdk8:
-        name: "openjdk8 clojure1.8 test-cljs"
+        name: "java8 clj1.8 test-cljs"
         clojure_version: "1.8"
         target: test-cljs
+
+    # - openjdk8:
+    #     name: "java8 clj1.10 test-clj"
+    #     clojure_version: "1.10"
+    #     target: test-clj
+    # - openjdk8:
+    #     name: "java8 clj1.10 test-cljs"
+    #     clojure_version: "1.10"
+    #     target: test-cljs
+
+    # - openjdk9:
+    #     name: "java9 clj1.9 test-clj"
+    #     clojure_version: "1.9"
+    #     target: test-clj
+    # - openjdk9:
+    #     name: "java9 clj1.9 test-cljs"
+    #     clojure_version: "1.9"
+    #     target: test-cljs
+
+    # - openjdk11:
+    #     name: "java11 clj1.8 test-clj"
+    #     clojure_version: "1.8"
+    #     target: test-clj
+    # - openjdk11:
+    #     name: "java11 clj1.8 test-cljs"
+    #     clojure_version: "1.8"
+    #     target: test-cljs
+
+    # - openjdk11:
+    #     name: "java11 clj1.10 test-clj"
+    #     clojure_version: "1.10"
+    #     target: test-clj
+    # - openjdk11:
+    #     name: "java11 clj1.10 test-cljs"
+    #     clojure_version: "1.10"
+    #     target: test-cljs
