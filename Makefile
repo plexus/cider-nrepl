@@ -1,4 +1,4 @@
-.PHONY: test-clj test-cljs eastwood cljfmt cloverage install smoketest release deploy clean
+.PHONY: test-clj test-cljs eastwood cljfmt cloverage install smoketest release deploy clean check_node
 
 CLOJURE_VERSION ?= 1.9
 export CLOVERAGE_VERSION = 1.0.13
@@ -16,7 +16,7 @@ source-deps: .source-deps
 test-clj: .source-deps smoketest
 	lein with-profile +$(CLOJURE_VERSION),+plugin.mranderson/config,+test-clj test
 
-test-cljs: .source-deps
+test-cljs: .source-deps check_node
 	lein with-profile +$(CLOJURE_VERSION),+plugin.mranderson/config,+test-cljs test
 
 eastwood:
@@ -46,6 +46,9 @@ smoketest: install
 	cd test/smoketest && \
         lein with-profile +$(CLOJURE_VERSION) uberjar && \
         java -jar target/smoketest-0.1.0-SNAPSHOT-standalone.jar
+
+check_node:
+	which node
 
 # When releasing, the BUMP variable controls which field in the
 # version string will be incremented in the *next* snapshot
