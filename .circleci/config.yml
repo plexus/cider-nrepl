@@ -8,22 +8,36 @@ commands:
     parameters:
       target:
         type: string
-        default: test-clj
+      clojure_version:
+        type: string
     steps:
-      - checkout
-      - clojure/with_cache:
-          cache_version: {{ .Environment.CLOJURE_VERSION }}
-          steps:
-            - run: make << parameters.target >>
+    - checkout
+    - clojure/with_cache:
+        cache_version: << parameters.clojure_version >>
+        steps:
+        - run: make << parameters.target >>
 
 jobs:
-  CLJ-Java8-Clojure18:
+  openjdk8:
     executor: clojure/openjdk8
-    environment: {CLOJURE_VERSION: 1.8}
-    steps: [checkout_and_run]
+    parameters:
+      target:
+        type: string
+      clojure_version:
+        type: string
+    environment: {CLOJURE_VERSION: << parameters.clojure_version >>}
+    steps:
+    - checkout_and_run:
+        target: << parameters.target >>
+        clojure_version: <<parameters.clojure_version>>
 
 workflows:
   version: 2
   cider_tests:
     jobs:
-      - CLJ-Java8-Clojure18
+    - openjdk8:
+        clojure_version: "1.8"
+        target: test-clj
+    - openjdk8:
+        clojure_version: "1.9"
+        target: test-clj
