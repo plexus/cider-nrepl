@@ -40,4 +40,4 @@ workflows:
         target: test-clj
     - openjdk8:
         clojure_version: "1.9"
-        target: test-clj
+        target: test-cljs
