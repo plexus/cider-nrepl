@@ -12,13 +12,14 @@ commands:
     steps:
       - checkout
       - clojure/with_cache:
+          cache_version: {{ .Environment.CLOJURE_VERSION }}
           steps:
             - run: make << parameters.target >>
 
 jobs:
   CLJ-Java8-Clojure18:
     executor: clojure/openjdk8
-    environment: {VERSION: "1.9.0"}
+    environment: {CLOJURE_VERSION: 1.8}
     steps: [checkout_and_run]
 
 workflows:
