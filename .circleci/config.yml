@@ -29,15 +29,17 @@ jobs:
     steps:
     - checkout_and_run:
         target: << parameters.target >>
-        clojure_version: <<parameters.clojure_version>>
+        clojure_version: << parameters.clojure_version >>
 
 workflows:
   version: 2
   cider_tests:
     jobs:
     - openjdk8:
+        name: "openjdk8 clojure1.8 test-clj"
         clojure_version: "1.8"
         target: test-clj
     - openjdk8:
-        clojure_version: "1.9"
+        name: "openjdk8 clojure1.8 test-cljs"
+        clojure_version: "1.8"
         target: test-cljs
