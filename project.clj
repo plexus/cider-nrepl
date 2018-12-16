@@ -33,9 +33,12 @@
   :test-paths ["test/common"] ;; See `test-clj` and `test-cljs` profiles below.
 
   :test-selectors {:default (fn [test-meta]
-                              (if-let [min-version (:min-clj-version test-meta)]
-                                (>= (compare (clojure-version) min-version) 0)
-                                true))
+                              (and (if-let [min-version (:min-clj-version test-meta)]
+                                     (>= (compare (clojure-version) min-version) 0)
+                                     true)
+                                   (if-let [max-version (:max-clj-version test-meta)]
+                                     (>= (compare max-version (clojure-version)) 0)
+                                     true)))
                    :debugger :debugger}
 
   :aliases {"bump-version" ["change" "version" "leiningen.release/bump-version"]}
@@ -90,12 +93,12 @@
              :1.9 {:dependencies [[org.clojure/clojure "1.9.0"]
                                   [org.clojure/clojurescript "1.9.946" :scope "provided"]]
                    :test-paths ["test/spec"]}
-             :1.10 {:dependencies [[org.clojure/clojure "1.10.0-beta7"]
+             :1.10 {:dependencies [[org.clojure/clojure "1.10.0-RC5"]
                                    [org.clojure/clojurescript "1.10.439" :scope "provided"]]
                     :test-paths ["test/spec"]}
              :master {:repositories [["snapshots" "https://oss.sonatype.org/content/repositories/snapshots"]]
                       :dependencies [[org.clojure/clojure "1.10.0-master-SNAPSHOT"]
-                                     [org.clojure/clojurescript "1.9.946" :scope "provided"]]}
+                                     [org.clojure/clojurescript "1.10.439" :scope "provided"]]}
 
              :test-clj {:source-paths ["test/src"]
                         :java-source-paths ["test/java"]
