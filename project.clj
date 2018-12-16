@@ -101,6 +101,7 @@
              :test-cljs {:test-paths ["test/cljs"]
                          :dependencies [[cider/piggieback "0.3.9"]
                                         [javax.xml.bind/jaxb-api "2.3.1"]]}
+             :kaocha {:dependencies [[lambdaisland/kaocha "0.0-319"]]}
 
              :sysutils {:plugins [[lein-sysutils "0.2.0"]]}
 
