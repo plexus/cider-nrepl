@@ -126,7 +126,7 @@
                                           :pprint-fn "cider.nrepl.middleware.pprint/fipp-pprint"
                                           :print-meta "true"}))))))
 
-(deftest ^{:kaocha/skip true :max-clj-version "1.9.0"} wrap-pprint-resolve-pprint-fn-1.9-test
+(deftest ^{:max-clj-version "1.9.0"} wrap-pprint-resolve-pprint-fn-1.9-test
   (testing "non-resolvable pprint-fn"
     (testing "non-existing ns"
       (let [response (session/message {:op :eval
