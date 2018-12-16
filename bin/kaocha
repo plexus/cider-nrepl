@@ -1,3 +1,4 @@
 #!/bin/bash
 
+
 /home/arne/bin/lein update-in :dependencies conj \[nrepl\ \"0.5.3\"\] -- update-in :plugins conj \[refactor-nrepl\ \"2.4.0\"\] -- update-in :plugins conj \[cider/cider-nrepl\ \"0.19.0-SNAPSHOT\"\] -- with-profile +1.9,+plugin.mranderson/config,+test-cljs,+kaocha run -m kaocha.runner "$@"
