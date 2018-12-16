@@ -25,6 +25,9 @@
   :plugins [[thomasa/mranderson "0.4.9"]]
   :exclusions [org.clojure/clojure]
 
+  :implicits false
+  :middleware [refactor-nrepl.plugin/middleware]
+
   :filespecs [{:type :bytes :path "cider/cider-nrepl/project.clj" :bytes ~(slurp "project.clj")}]
 
   :test-paths ["test/common"] ;; See `test-clj` and `test-cljs` profiles below.
