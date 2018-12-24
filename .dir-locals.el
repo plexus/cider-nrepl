@@ -4,4 +4,5 @@
 ((clojure-mode
   (clojure-indent-style . :always-align)
   (indent-tabs-mode . nil)
-  (fill-column . 80)))
+  (fill-column . 80)
+  (cider-lein-parameters . "with-profile +1.9,+plugin.mranderson/config,+test-cljs,+kaocha repl :headless :host localhost")))
