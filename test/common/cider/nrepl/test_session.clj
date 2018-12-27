@@ -39,10 +39,13 @@
 
 (defn session-fixture
   [f]
-  (with-open [server (start-server :handler *handler*)
+  (with-open [server    (start-server :handler *handler*)
               transport (nrepl/connect :port (:port server))]
-    (let [client (nrepl/client transport Long/MAX_VALUE)]
-      (binding [*session* (nrepl/client-session client)]
+    (let [client  (nrepl/client transport Long/MAX_VALUE)
+          session (nrepl/client-session client)]
+      (binding [*server*    server
+                *transport* transport
+                *session*   session]
         (f)))))
 
 (defn message
