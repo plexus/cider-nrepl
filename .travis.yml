@@ -12,6 +12,8 @@ env:
     - VERSION=1.8 TARGET=test-cljs
     - VERSION=1.9 TARGET=test-clj
     - VERSION=1.9 TARGET=test-cljs
+    - VERSION=1.10 TARGET=test-clj
+    - VERSION=1.10 TARGET=test-cljs
   global:
     - secure: "bCp4gU7XgeqLnqKwEpJarnKPbGljHyLE2rZnub4mEHD8kcvh6LoEkG/2QCtnSETj8zrQJwyMuEDGUwPgjmzQ/aEn6UiIYmv7ka6QnLBxOxhqQTbDtG7HssfkeT5b67LgOyQX7ejK88vnmH+OeWXM7kOOvUwVy5BVgsYyr2f1cGU="
     - secure: "D2Ie7dUZ9nQOIWtkRl2XWZeijSL8expUXP3GziSqQV1scJzwexxnUsRvWOkc2YU8+6IIGz9tcyt9RrEFUVF31VZgRSHh8P5rGGCzI2l99djKhYFfSErElwgoAJZFtOzougZK66/Gtb5uDo5L/wlKHkl4st3miqm+mEvfJITDjRQ="
@@ -32,9 +34,9 @@ stages:
 jobs:
   include:
     # Test OpenJDK against latest Clojure stable
-    - env: VERSION=1.9 TARGET=test-clj
+    - env: VERSION=1.10 TARGET=test-clj
       jdk: openjdk8
-    - env: VERSION=1.9 TARGET=test-cljs
+    - env: VERSION=1.10 TARGET=test-cljs
       jdk: openjdk8
 
     # Test Clojure master against a single JDK
@@ -44,18 +46,18 @@ jobs:
       jdk: oraclejdk8
 
     # Coverage analysis
-    - env: VERSION=1.9 TARGET=cloverage
+    - env: VERSION=1.10 TARGET=cloverage
       jdk: oraclejdk8
       after_success: bash <(curl -s https://codecov.io/bash) -f target/coverage/codecov.json
 
     # Eastwood linter
     - stage: check
-      env: VERSION=1.9 TARGET=eastwood
+      env: VERSION=1.10 TARGET=eastwood
       jdk: oraclejdk8
 
     # Check cljfmt
     - stage: check
-      env: VERSION=1.9 TARGET=cljfmt
+      env: VERSION=1.10 TARGET=cljfmt
       jdk: oraclejdk8
 
     # Deployment
@@ -67,4 +69,4 @@ jobs:
   allow_failures:
     - env: VERSION=master TARGET=test-clj
     - env: VERSION=master TARGET=test-cljs
-    - env: VERSION=1.9 TARGET=cloverage
+    - env: VERSION=1.10 TARGET=cloverage
