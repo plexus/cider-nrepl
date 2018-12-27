@@ -95,11 +95,11 @@
              :1.9 {:dependencies [[org.clojure/clojure "1.9.0"]
                                   [org.clojure/clojurescript "1.9.946" :scope "provided"]]
                    :test-paths ["test/spec"]}
-             :1.10 {:dependencies [[org.clojure/clojure "1.10.0-RC5"]
+             :1.10 {:dependencies [[org.clojure/clojure "1.10.0"]
                                    [org.clojure/clojurescript "1.10.439" :scope "provided"]]
                     :test-paths ["test/spec"]}
              :master {:repositories [["snapshots" "https://oss.sonatype.org/content/repositories/snapshots"]]
-                      :dependencies [[org.clojure/clojure "1.10.0-master-SNAPSHOT"]
+                      :dependencies [[org.clojure/clojure "1.11.0-master-SNAPSHOT"]
                                      [org.clojure/clojurescript "1.10.439" :scope "provided"]]}
 
              :test-clj {:source-paths ["test/src"]
@@ -107,7 +107,7 @@
                         :resource-paths ["test/resources"]
                         :test-paths ["test/clj"]}
              :test-cljs {:test-paths ["test/cljs"]
-                         :dependencies [[cider/piggieback "0.3.9"]
+                         :dependencies [[cider/piggieback "0.3.10"]
                                         [javax.xml.bind/jaxb-api "2.3.1"]]}
              :kaocha {:dependencies [[lambdaisland/kaocha "0.0-319"]]}
 
